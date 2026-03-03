@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const otpController = require("../controllers/otpController");
+
+// ✅ Use destructuring (VERY IMPORTANT)
+const { sendOtp, verifyOtp } = require("../controllers/otpController");
+
 const auth = require("../middleware/authMiddleware");
 
-// router.post("path", controller_function)
-router.post("/send", auth, otpController.sendOtp); 
-router.post("/verify", auth, otpController.verifyOtp);
+// Debug check
+console.log("sendOtp type:", typeof sendOtp);
+console.log("verifyOtp type:", typeof verifyOtp);
+console.log("auth type:", typeof auth);
+
+router.post("/send", auth, sendOtp);
+router.post("/verify", auth, verifyOtp);
 
 module.exports = router;
